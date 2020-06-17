@@ -1,0 +1,20 @@
+version: '3'
+services:
+  wfe:
+    build:  #Override default Dockerfile ("build .")
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - /app/node_modules #Bookmark - i.e. don't try to map this in the host FS.
+      - .:/app
+    stdin_open: true
+  tests:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev  #Same as above as it'll be testing that
+    volumes:
+      - /app/node_modules
+      - .:/app
+    command: ["npm","run","test"]
