@@ -4,9 +4,9 @@ services:
     build:  #Override default Dockerfile ("build .")
       context: .
       dockerfile: Dockerfile.dev
-    ports:
+    ports: #Port mapping
       - "3000:3000"
-    volumes:
+    volumes: # Docker Volumes/Mounting
       - /app/node_modules #Bookmark - i.e. don't try to map this in the host FS.
       - .:/app
     stdin_open: true
@@ -17,4 +17,4 @@ services:
     volumes:
       - /app/node_modules
       - .:/app
-    command: ["npm","run","test"]
+    command: ["npm","run","test"] #Overwrite default command
